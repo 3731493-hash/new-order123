@@ -1,5 +1,12 @@
-import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+import { getApps, initializeApp } from "firebase/app";
+import {
+  browserLocalPersistence,
+  getAuth,
+  setPersistence,
+} from "firebase/auth";
+import {
+  initializeFirestore,
+} from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDxsovhTBOoFvAeXbJdUSAgDAKKDhcJAl4",
@@ -10,6 +17,14 @@ const firebaseConfig = {
   appId: "1:956662071456:web:99e94623b7f088d5e009c5",
 };
 
-const app = initializeApp(firebaseConfig);
+const app = getApps().length > 0
+  ? getApps()[0]
+  : initializeApp(firebaseConfig);
 
-export const db = getFirestore(app);
+export const auth = getAuth(app);
+
+void setPersistence(auth, browserLocalPersistence);
+
+export const db = initializeFirestore(app, {
+  experimentalAutoDetectLongPolling: true,
+});

@@ -9,6 +9,7 @@ import Room from "@/components/Room";
 
 import {
   getPlayerId,
+  getSavedRoom,
   type Player,
   subscribePlayers,
 } from "@/lib/room";
@@ -21,14 +22,61 @@ export default function Page() {
   const [roomCode, setRoomCode] = useState("");
   const [players, setPlayers] = useState<Player[]>([]);
   const [currentPlayerId, setCurrentPlayerId] = useState("");
+  const [isRestoring, setIsRestoring] = useState(true);
 
+  // 앱을 다시 열었을 때 저장된 방으로 자동 복귀
+  useEffect(() => {
+    let isActive = true;
+
+    async function restoreGame() {
+      try {
+        const savedRoom = await getSavedRoom();
+
+        if (!isActive) {
+          return;
+        }
+
+        if (savedRoom) {
+          setNickname(savedRoom.nickname);
+          setRoomCode(savedRoom.roomCode);
+          setCurrentPlayerId(savedRoom.playerId);
+          setScreen("lobby");
+          return;
+        }
+
+        const savedNickname = localStorage.getItem(
+          "new-order-nickname",
+        );
+
+        if (savedNickname) {
+          setNickname(savedNickname);
+        }
+      } catch (error) {
+        console.error("게임 복구 오류:", error);
+      } finally {
+        if (isActive) {
+          setIsRestoring(false);
+        }
+      }
+    }
+
+    void restoreGame();
+
+    return () => {
+      isActive = false;
+    };
+  }, []);
+
+  // 로비 참가자 목록 실시간 불러오기
   useEffect(() => {
     if (screen !== "lobby" || !roomCode) {
       setPlayers([]);
       return;
     }
 
-    setCurrentPlayerId(getPlayerId());
+    if (!currentPlayerId) {
+      setCurrentPlayerId(getPlayerId());
+    }
 
     const unsubscribe = subscribePlayers(
       roomCode,
@@ -43,13 +91,29 @@ export default function Page() {
     return () => {
       unsubscribe();
     };
-  }, [screen, roomCode]);
+  }, [screen, roomCode, currentPlayerId]);
 
   const currentPlayer = players.find(
     (player) => player.id === currentPlayerId,
   );
 
   const isHost = currentPlayer?.isHost ?? false;
+
+  if (isRestoring) {
+    return (
+      <main className="app-screen dark-theme">
+        <section className="form-panel">
+          <p className="section-label">NEW ORDER</p>
+
+          <h1 className="form-title">
+            게임을
+            <br />
+            불러오는 중...
+          </h1>
+        </section>
+      </main>
+    );
+  }
 
   if (screen === "home") {
     return (
@@ -84,10 +148,12 @@ export default function Page() {
         }}
         onCreate={(createdRoomCode) => {
           setRoomCode(createdRoomCode);
+          setCurrentPlayerId(getPlayerId());
           setScreen("lobby");
         }}
         onJoin={(joinedRoomCode) => {
           setRoomCode(joinedRoomCode);
+          setCurrentPlayerId(getPlayerId());
           setScreen("lobby");
         }}
       />
