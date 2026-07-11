@@ -581,3 +581,54 @@ button:disabled {
   cursor: not-allowed;
   opacity: 0.45;
 }
+
+
+/* =========================
+   계급 시스템
+========================= */
+
+.game-player-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 13px 4px;
+  border-bottom: 1px solid #222;
+}
+
+.game-player-info {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.game-player-info span {
+  color: #aaa;
+}
+
+.game-player-info strong {
+  color: #fff;
+}
+
+.rank-up-button {
+  flex-shrink: 0;
+  padding: 9px 12px;
+  border: 1px solid #e60012;
+  background: transparent;
+  color: #e60012;
+  font-size: 0.72rem;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.rank-up-button:hover:not(:disabled) {
+  background: #e60012;
+  color: #fff;
+}
+
+.rank-up-button:disabled {
+  border-color: #444;
+  color: #666;
+  }
