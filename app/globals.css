@@ -1,0 +1,416 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  overflow-x: hidden;
+  background: #070707;
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  border: 0;
+}
+
+/* =========================
+   공통 화면
+========================= */
+
+.app-screen {
+  display: flex;
+  min-height: 100svh;
+  align-items: center;
+  justify-content: center;
+  padding: 28px;
+}
+
+.dark-theme {
+  background:
+    radial-gradient(circle at 80% 10%, rgba(230, 0, 18, 0.15), transparent 30%),
+    #070707;
+  color: white;
+}
+
+.form-panel {
+  width: 100%;
+  max-width: 420px;
+  animation: panelEnter 320ms ease-out both;
+}
+
+.back-button {
+  margin-bottom: 52px;
+  padding: 0;
+  background: transparent;
+  color: #777;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  cursor: pointer;
+}
+
+.back-button:hover {
+  color: white;
+}
+
+.section-number {
+  margin-bottom: 8px;
+  color: #e60012;
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.3em;
+}
+
+.section-label {
+  margin: 0 0 18px;
+  color: #777;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.28em;
+}
+
+.form-title,
+.room-title {
+  margin: 0;
+  letter-spacing: -0.055em;
+}
+
+.form-title {
+  font-size: clamp(2.7rem, 12vw, 4.5rem);
+  line-height: 1.02;
+}
+
+.room-title {
+  font-size: clamp(2.5rem, 11vw, 4rem);
+  line-height: 1.04;
+}
+
+.room-title span {
+  color: #e60012;
+}
+
+.form-description {
+  margin: 20px 0 42px;
+  color: #8b8b8b;
+  font-size: 0.92rem;
+  line-height: 1.7;
+}
+
+.nickname-input {
+  width: 100%;
+  padding: 18px 4px;
+  border: 0;
+  border-bottom: 1px solid #444;
+  border-radius: 0;
+  outline: none;
+  background: transparent;
+  color: white;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.nickname-input::placeholder {
+  color: #444;
+}
+
+.nickname-input:focus {
+  border-bottom-color: #e60012;
+}
+
+.primary-button,
+.secondary-button {
+  width: 100%;
+  padding: 18px;
+  font-size: 0.85rem;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  cursor: pointer;
+  transition:
+    transform 120ms ease,
+    background 120ms ease,
+    border-color 120ms ease;
+}
+
+.primary-button {
+  margin-top: 26px;
+  background: #e60012;
+  color: white;
+}
+
+.primary-button:hover {
+  background: #ff1326;
+}
+
+.secondary-button {
+  margin-top: 12px;
+  border: 1px solid #333;
+  background: transparent;
+  color: white;
+}
+
+.secondary-button:hover {
+  border-color: #777;
+}
+
+.primary-button:active,
+.secondary-button:active {
+  transform: scale(0.98);
+}
+
+.room-actions {
+  width: 100%;
+}
+
+/* =========================
+   첫 화면
+========================= */
+
+.home-screen {
+  position: relative;
+  min-height: 100svh;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 80% 15%, rgba(230, 0, 18, 0.18), transparent 34%),
+    linear-gradient(145deg, #090909 0%, #030303 100%);
+  color: white;
+}
+
+.home-content {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  width: min(100%, 500px);
+  min-height: 100svh;
+  margin: 0 auto;
+  padding: 42px 28px 28px;
+  flex-direction: column;
+}
+
+.background-grid {
+  position: absolute;
+  inset: 0;
+  opacity: 0.12;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.12) 1px, transparent 1px);
+  background-size: 52px 52px;
+  mask-image: linear-gradient(to bottom, black, transparent 82%);
+}
+
+.red-glow {
+  position: absolute;
+  border-radius: 50%;
+  background: #e60012;
+  filter: blur(100px);
+  opacity: 0.14;
+}
+
+.red-glow-one {
+  top: -70px;
+  right: -80px;
+  width: 260px;
+  height: 260px;
+}
+
+.red-glow-two {
+  bottom: 70px;
+  left: -100px;
+  width: 220px;
+  height: 220px;
+}
+
+.brand-kicker {
+  margin: 0 0 22px;
+  color: #777;
+  font-size: 0.65rem;
+  font-weight: 900;
+  letter-spacing: 0.38em;
+}
+
+.brand-title {
+  margin: 0;
+  font-family: Impact, "Arial Black", sans-serif;
+  font-size: clamp(5rem, 25vw, 8.2rem);
+  font-weight: 900;
+  line-height: 0.76;
+  letter-spacing: -0.055em;
+  text-transform: uppercase;
+}
+
+.brand-title span {
+  display: block;
+}
+
+.brand-subtitle {
+  margin-top: 22px;
+  font-size: clamp(1.25rem, 6vw, 2rem);
+  font-weight: 900;
+  letter-spacing: 0.08em;
+}
+
+.brand-subtitle strong {
+  color: #e60012;
+}
+
+.home-copy {
+  margin-top: 50px;
+}
+
+.home-copy p {
+  margin: 0;
+  color: #a0a0a0;
+  font-size: clamp(1rem, 4.8vw, 1.25rem);
+  font-weight: 700;
+  line-height: 1.65;
+  letter-spacing: -0.025em;
+}
+
+.home-actions {
+  width: 100%;
+  margin-top: auto;
+}
+
+.start-game-button {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  padding: 21px 22px;
+  background: #e60012;
+  color: white;
+  cursor: pointer;
+  transition:
+    transform 120ms ease,
+    background 120ms ease;
+}
+
+.start-game-button span {
+  font-size: 0.82rem;
+  font-weight: 900;
+  letter-spacing: 0.24em;
+}
+
+.start-game-button strong {
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+
+.start-game-button:hover {
+  background: #ff1225;
+}
+
+.start-game-button:active {
+  transform: scale(0.985);
+}
+
+.utility-menu {
+  display: grid;
+  width: 100%;
+  margin-top: 14px;
+  grid-template-columns: 1fr 1px 1fr;
+  align-items: center;
+}
+
+.utility-menu button {
+  padding: 15px 10px;
+  background: transparent;
+  color: #777;
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  cursor: pointer;
+}
+
+.utility-menu button:hover {
+  color: white;
+}
+
+.utility-menu span {
+  width: 1px;
+  height: 20px;
+  background: #333;
+}
+
+.version-text {
+  margin-top: 22px;
+  color: #333;
+  font-size: 0.55rem;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+}
+
+/* =========================
+   애니메이션
+========================= */
+
+.brand {
+  animation: brandEnter 650ms ease-out both;
+}
+
+.home-copy {
+  animation: fadeUp 500ms 180ms ease-out both;
+}
+
+.home-actions {
+  animation: fadeUp 500ms 300ms ease-out both;
+}
+
+@keyframes brandEnter {
+  from {
+    opacity: 0;
+    transform: translateY(-24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes panelEnter {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (min-width: 700px) {
+  .home-content {
+    padding-top: 54px;
+  }
+
+  .brand-title {
+    font-size: 7rem;
+  }
+}
