@@ -1,11 +1,6 @@
 "use client";
 
-type Player = {
-  id: string;
-  name: string;
-  isHost: boolean;
-  rank: string;
-};
+import type { Player } from "@/lib/room";
 
 type LobbyProps = {
   roomCode: string;
