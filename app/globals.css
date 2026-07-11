@@ -414,107 +414,170 @@ button {
     font-size: 7rem;
   }
 }
-.room-code-input {
-  text-transform: uppercase;
-  letter-spacing: 0.3em;
+/* =========================
+   로비 및 게임 화면
+========================= */
+
+.lobby-panel,
+.game-panel {
+  width: 100%;
+  max-width: 480px;
+  animation: panelEnter 320ms ease-out both;
 }
 
-.room-error-message {
-  margin: 18px 0 0;
-  color: #ff3344;
-  font-size: 0.85rem;
-  font-weight: 700;
-  line-height: 1.5;
-}
-
-button:disabled {
-  cursor: not-allowed;
-  opacity: 0.5;
-}
-.lobby-heading {
+.lobby-header {
   display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 28px;
+}
+
+.lobby-caption {
+  margin: 0 0 6px;
+  color: #777;
+  font-size: 0.65rem;
+  font-weight: 900;
+  letter-spacing: 0.22em;
+}
+
+.lobby-code {
+  margin: 0;
+  color: #fff;
+  font-family: Impact, "Arial Black", sans-serif;
+  font-size: clamp(3.2rem, 16vw, 5.5rem);
+  line-height: 0.95;
+  letter-spacing: 0.08em;
+}
+
+.player-count {
+  margin: 0 0 5px;
+  color: #e60012;
+  font-size: 1rem;
+  font-weight: 900;
+}
+
+.player-list {
+  display: grid;
+  gap: 10px;
+}
+
+.player-card {
+  display: flex;
+  min-height: 72px;
   align-items: center;
   justify-content: space-between;
-  margin: 38px 0 14px;
+  padding: 16px 18px;
+  border: 1px solid #262626;
+  background: rgba(255, 255, 255, 0.025);
 }
 
-.lobby-heading h2 {
-  margin: 0;
-  font-size: 1.4rem;
+.player-card div {
+  display: grid;
+  gap: 5px;
 }
 
-.lobby-heading span {
+.player-card strong {
+  font-size: 1rem;
+}
+
+.player-card span {
+  color: #666;
+  font-size: 0.58rem;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+}
+
+.player-card b {
+  color: #e60012;
+  font-size: 0.85rem;
+}
+
+.lobby-start-button {
+  margin-top: 24px;
+}
+
+.waiting-message {
+  margin: 26px 0 0;
   color: #777;
+  text-align: center;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.room-code-input {
+  text-transform: uppercase;
+  letter-spacing: 0.24em;
+}
+
+.game-panel {
+  text-align: center;
+}
+
+.game-kicker {
+  margin: 0 0 14px;
+  color: #e60012;
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.28em;
+}
+
+.game-title {
+  margin: 0;
+  font-family: Impact, "Arial Black", sans-serif;
+  font-size: clamp(4rem, 20vw, 7rem);
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+}
+
+.rank-card {
+  display: grid;
+  margin-top: 36px;
+  padding: 28px;
+  border: 1px solid #333;
+  background: linear-gradient(145deg, #111, #080808);
+  gap: 12px;
+}
+
+.rank-card span {
+  color: #888;
   font-size: 0.8rem;
   font-weight: 800;
 }
 
-.player-list {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.player-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 17px;
-  border: 1px solid #292929;
-  background: #0d0d0d;
-}
-
-.player-row div {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-
-.player-row span {
-  color: #777;
-  font-size: 0.75rem;
-}
-
-.player-row em {
-  color: #e60012;
-  font-size: 0.65rem;
-  font-style: normal;
-  font-weight: 900;
-  letter-spacing: 0.15em;
-}
-
-.lobby-waiting-message {
-  margin-top: 28px;
-  color: #777;
-  font-size: 0.85rem;
-  line-height: 1.7;
-  text-align: center;
-}
-
-.game-player-card {
-  margin-top: 36px;
-  padding: 28px 22px;
-  border: 1px solid #292929;
-  background: #0d0d0d;
-}
-
-.game-player-card span {
-  display: block;
-  color: #777;
-  font-size: 0.7rem;
-  font-weight: 900;
-  letter-spacing: 0.2em;
-}
-
-.game-player-card strong {
-  display: block;
-  margin-top: 14px;
+.rank-card strong {
   color: #e60012;
   font-size: 3rem;
 }
 
-.game-player-card p {
-  margin: 12px 0 0;
-  font-size: 1rem;
-  font-weight: 800;
+.game-description {
+  margin: 24px 0;
+  color: #777;
+  font-size: 0.85rem;
+  line-height: 1.7;
+}
+
+.game-player-list {
+  display: grid;
+  gap: 8px;
+  text-align: left;
+}
+
+.game-player-list div {
+  display: flex;
+  justify-content: space-between;
+  padding: 13px 4px;
+  border-bottom: 1px solid #222;
+}
+
+.game-player-list span {
+  color: #aaa;
+}
+
+.game-player-list strong {
+  color: #fff;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
 }
