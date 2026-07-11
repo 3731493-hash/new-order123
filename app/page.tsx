@@ -1,35 +1,55 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Home from "@/components/Home";
+import Lobby from "@/components/Lobby";
 import Nickname from "@/components/Nickname";
 import Room from "@/components/Room";
-import Lobby from "@/components/Lobby";
+
+import {
+  getPlayerId,
+  type Player,
+  subscribePlayers,
+} from "@/lib/room";
 
 type Screen = "home" | "nickname" | "room" | "lobby";
-
-type Player = {
-  id: string;
-  name: string;
-  isHost: boolean;
-  rank: string;
-};
 
 export default function Page() {
   const [screen, setScreen] = useState<Screen>("home");
   const [nickname, setNickname] = useState("");
+  const [roomCode, setRoomCode] = useState("");
+  const [players, setPlayers] = useState<Player[]>([]);
+  const [currentPlayerId, setCurrentPlayerId] = useState("");
 
-  const [roomCode] = useState("DEMO01");
+  useEffect(() => {
+    if (screen !== "lobby" || !roomCode) {
+      setPlayers([]);
+      return;
+    }
 
-  const [players] = useState<Player[]>([
-    {
-      id: "1",
-      name: "HOST",
-      isHost: true,
-      rank: "이병",
-    },
-  ]);
+    setCurrentPlayerId(getPlayerId());
+
+    const unsubscribe = subscribePlayers(
+      roomCode,
+      (nextPlayers) => {
+        setPlayers(nextPlayers);
+      },
+      () => {
+        alert("참가자 목록을 불러오지 못했습니다.");
+      },
+    );
+
+    return () => {
+      unsubscribe();
+    };
+  }, [screen, roomCode]);
+
+  const currentPlayer = players.find(
+    (player) => player.id === currentPlayerId,
+  );
+
+  const isHost = currentPlayer?.isHost ?? false;
 
   if (screen === "home") {
     return (
@@ -44,7 +64,9 @@ export default function Page() {
   if (screen === "nickname") {
     return (
       <Nickname
-        onBack={() => setScreen("home")}
+        onBack={() => {
+          setScreen("home");
+        }}
         onComplete={(name) => {
           setNickname(name);
           setScreen("room");
@@ -57,9 +79,17 @@ export default function Page() {
     return (
       <Room
         nickname={nickname}
-        onBack={() => setScreen("nickname")}
-        onCreate={() => setScreen("lobby")}
-        onJoin={() => setScreen("lobby")}
+        onBack={() => {
+          setScreen("nickname");
+        }}
+        onCreate={(createdRoomCode) => {
+          setRoomCode(createdRoomCode);
+          setScreen("lobby");
+        }}
+        onJoin={(joinedRoomCode) => {
+          setRoomCode(joinedRoomCode);
+          setScreen("lobby");
+        }}
       />
     );
   }
@@ -67,16 +97,8 @@ export default function Page() {
   return (
     <Lobby
       roomCode={roomCode}
-      players={[
-        players[0],
-        {
-          id: "2",
-          name: nickname,
-          isHost: false,
-          rank: "이병",
-        },
-      ]}
-      isHost={true}
+      players={players}
+      isHost={isHost}
     />
   );
 }
