@@ -431,3 +431,90 @@ button:disabled {
   cursor: not-allowed;
   opacity: 0.5;
 }
+.lobby-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 38px 0 14px;
+}
+
+.lobby-heading h2 {
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+.lobby-heading span {
+  color: #777;
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+
+.player-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.player-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 17px;
+  border: 1px solid #292929;
+  background: #0d0d0d;
+}
+
+.player-row div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.player-row span {
+  color: #777;
+  font-size: 0.75rem;
+}
+
+.player-row em {
+  color: #e60012;
+  font-size: 0.65rem;
+  font-style: normal;
+  font-weight: 900;
+  letter-spacing: 0.15em;
+}
+
+.lobby-waiting-message {
+  margin-top: 28px;
+  color: #777;
+  font-size: 0.85rem;
+  line-height: 1.7;
+  text-align: center;
+}
+
+.game-player-card {
+  margin-top: 36px;
+  padding: 28px 22px;
+  border: 1px solid #292929;
+  background: #0d0d0d;
+}
+
+.game-player-card span {
+  display: block;
+  color: #777;
+  font-size: 0.7rem;
+  font-weight: 900;
+  letter-spacing: 0.2em;
+}
+
+.game-player-card strong {
+  display: block;
+  margin-top: 14px;
+  color: #e60012;
+  font-size: 3rem;
+}
+
+.game-player-card p {
+  margin: 12px 0 0;
+  font-size: 1rem;
+  font-weight: 800;
+}
